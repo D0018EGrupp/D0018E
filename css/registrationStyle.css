@@ -1,12 +1,8 @@
-
-
-body{
-font-family:"Lato",sans-serif ;
-
+body {
+    font-family: "Lato", sans-serif;
 }
 
-
-.loginform{
+.registration-form{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -14,19 +10,19 @@ font-family:"Lato",sans-serif ;
     width: 400px;
 }
 
-.loginform h1 {
+.registration-form h1 {
     font-size: 40px;
     text-align: center;
     text-transform: uppercase;
-    margin: 40px 0;
+    margin: 30px 0;
 }
 
-.loginform h1 p {
+.registration-form h1 p {
     font-size: 20px;
     margin: 15px 0;
 }
 
-.loginform input{
+.registration-form input{
     font-size: 16px;
     padding: 15px 10px;
     width: 100%;
@@ -36,19 +32,20 @@ font-family:"Lato",sans-serif ;
     background-color: rgb(255, 255, 255);
 }
 
-.loginform button{
+.registration-form button{
     font-size: 18px;
     font-weight: bold;
-    margin: 10px 0;
+    margin: 20px 0;
     padding: 10px 15px ;
-    width: 106%;
+    width: 105%;
     border: 4px color black;
     border-radius: 5px;
     background-color: black;
     color: white;
+    cursor:pointer;
 }
 
-.loginform button:hover{
+.registration-form button:hover{
     background-color: white;
     color: black;
 }
