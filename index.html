@@ -1,10 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="D:\D0018E\Website\php\index.php"></script>
-<title>Page Title</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <?php ?>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Product1</a>
+        <a href="#">Product2</a>
+        <a href="#">Product3</a>
+        <a href="#">Product4</a>
+      </div>
+<span style="font-size:30px;cursor:pointer;position: absolute;" onclick="openNav()">&#9776; Products</span>
+<script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+<div class="card">
+    <img src="productImg/placeholder.png" alt="Denim Jeans" style="width:100%">
+    <h1>Tailored Jeans</h1>
+    <p class="price">$19.99</p>
+    <p>Some text about the jeans..</p>
+    <p><button>Add to Cart</button></p>
+</div>
+<div class="card">
+    <img src="productImg/placeholder.png" alt="Denim Jeans" style="width:100%">
+    <h1>Tailored Jeans</h1>
+    <p class="price">$19.99</p>
+    <p>Some text about the jeans..</p>
+    <p><button>Add to Cart</button></p>
+</div>
+
+
+
+
 </body>
 </html>
