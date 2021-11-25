@@ -23,21 +23,22 @@
 </script>
 <div class="myTopLink">
     <a href="./html/checkout.html"><img src="img/cart.png" href="/html/checkout.html" style="width: 3%; float: right; padding: 10px;"></a>
-    <a href="./html/login.html"><img src="img/profile.png" href="/html/login.html" style="width: 2.5%; float: right; margin-top: 6px;"></a>
+    <a href="./php/login.php"><img src="img/profile.png" href="/php/login.php" style="width: 2.5%; float: right; margin-top: 6px;"></a>
 </div>
-<div class="card">
-    <img src="productImg/placeholder.png" alt="Denim Jeans" style="width:100%">
-    <h1>Tailored Jeans</h1>
-    <p class="price">$19.99</p>
-    <p>Some text about the jeans..</p>
+<?php
+include("./php/indexBackend.php");
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+    echo '<div class="card">
+    <img src="productImg/placeholder.png" style="width:100%">
+    <h1>'.$row["Name"].'</h1>
+    <p class="price">$'.$row["Price"].'</p>
+    <p>'.$row["Description"].'</p>
     <p><button>Add to Cart</button></p>
-</div>
-<div class="card">
-    <img src="productImg/placeholder.png" alt="Denim Jeans" style="width:100%">
-    <h1>Tailored Jeans</h1>
-    <p class="price">$19.99</p>
-    <p>Some text about the jeans..</p>
-    <p><button>Add to Cart</button></p>
-</div>
+    </div>';
+  }
+}
+$conn->close();
+?>
 </body>
 </html>
