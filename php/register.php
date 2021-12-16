@@ -1,24 +1,59 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Registration Form</title>  
+        <link rel="stylesheet" type="text/css" href="../css/registrationStyle.css">      
+    </head>
+
+<body>
+    <div class ="registration-form">
+        <h1> <img src="../img/profile.png" style="width:200px; height: 200px;"></h1>
+        <form method = "POST" action="">
+            <input id="text" type="text" name="fname" placeholder="Firstname" required>
+            <input id="text" type="text" name="lastname" placeholder="Lastname" required>
+            <input id="text" type="text" name="username" placeholder="User Name" required>
+            <input id="text" type="email" name="email" placeholder="Email Address" required>
+            <input id="text" type="password" name="password" placeholder="Password" required>
+            <input id="text" type="text" name="phonenumber" placeholder="Phone Number Optional">
+
+            <input class="button" name="submit" id="button" type="submit" value="Sign Up">
+            
+        </form>
+
+     </div>
+
+
+    
+</body>
+</html> 
+
+
+
+
 <?php
 session_start();
-    include("connection.php");
-    include("functions.php");
+require("indexBackend.php");
+include("functions.php");
         //some thing was posted
-    if($_SERVER['REQUEST_METHHOD'] == "POST"){
-       $name = $_POST['name'];
-       $lastname = $_POST['lastname'];
-       $username = $_POST['username'];
-       $email = $_POST['email'];
-       $password = $_POST['password'];
-       $phonenumber = $_POST['phonenumber'];
-
-        if(!empty($name) && !empty($lastname) && !empty($username) && !empty($email)  && !empty($password)){
-
+    
+    if (isset($_POST['submit'])){
+        $fname = $_POST['fname'];
+        $lastname = $_POST['lastname'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $phonenumber = $_POST['phonenumber'];
+        $username = $_POST['username'];
+    
+        if(!empty($fname) && !empty($lastname) && !empty($username) && !empty($email)  && !empty($password)){
             //save to database
-            $UID = random_num(50);
-            $query = "insert into users (Name,Lastname,Email,Adress,Phonenumber,Password,Zipcode) values ('$Name','$Lastname','$Email','$Phonenumber','$Password')";
-            mysqli_query($con, $query);
+            $query = $conn->prepare("INSERT INTO Users (FName, Lastname, Email, Phonenumber, Password_1, username) VALUES (?, ?, ?, ?, ?, ?)");
+            $query->bind_param("ssssss",$fname, $lastname, $email, $phonenumber, $password, $username);
+            $query->execute();
+            $query->close();
 
-            header("Location: login.php");
+            header("Location: login.php",);
             die;
         }
 
@@ -26,35 +61,6 @@ session_start();
             echo "please enter valid information";
     
         }
-    }
+}
+   
 ?>
-
-<!DOCTYPE html>
-
-<html>
-
-<head>
-    <title>Registration Form</title>
-    <link rel="stylesheet" type="text/css" href="../css/registrationStyle.css">        
-</head>
-<body>
-    <div class="registration-form">
-        <h1> <img src="../img/profile.png" style="width:200px; height: 200px;;"></h1>
-        <form action="register.php" method="post">
-            <p>Name:</p>
-            <input type="text" name="name" placeholder="Firstname" required >
-            <p>Lastname:</p>
-            <input type="text" name="lastname" placeholder="Lastname" required >
-            <p>User Name:</p>
-            <input type="text" name="username" placeholder="User Name" required>
-            <p>Email:</p>
-            <input type="email" name="email" placeholder="Email Address" required>
-            <p>Password:</p>
-            <input type="password" name="password" placeholder="Password" required>
-            <p>PhoneNumber:</p>
-            <input type="text" name="phonenumber" placeholder="Phone Number Optional">
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-</body>
-</html>

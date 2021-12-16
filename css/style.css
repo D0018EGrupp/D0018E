@@ -50,6 +50,7 @@ body {
     text-align: center;
     font-family: arial;
     margin-top: 4%;
+    list-style: none;
 }
   
 .price {
@@ -67,8 +68,47 @@ body {
     cursor: pointer;
     width: 100%;
     font-size: 18px;
+    text-decoration: none;
+}
+a:link{
+    text-decoration: none!important;
+  }
+
+  .noDecoration, a:link, a:visited {
+    text-decoration: none;
+}
+#button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
 }
   
 .card button:hover {
+    opacity: 0.7;
+}
+
+
+.logout .button{
+    font-size: 15px;
+    margin-right: -6%;
+    float: right;
+    margin-top: 4%;
+    font-weight: bold;
+    padding: 5px 10px ;
+    width: 6%;
+    border: 2px color black;
+    border-radius: 2px;
+    background-color: black;
+    color: white;
+    cursor:pointer;
+}
+
+.logout .button:hover{
     opacity: 0.7;
 }

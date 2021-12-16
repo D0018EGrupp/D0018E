@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' href='../css/Profile.css'>
+    <link rel='preconnect' type="php" href='../php/profile.php'>
+
+<title>User Information</title>
+
+</head>
+<body>
+
+<h1>
+    <a href="../html/Profile.html">
+        <img class="smallProfile" src="../img/profile.png" style="width: 2.5%;">
+    </a>
+
+    <a href="..">
+        <img class="smallProfile" src="../img/home.png" style="width: 2.75%;">
+    </a>
+
+    <a href="../html/checkout.html">
+        <img class="smallProfile" src="../img/cart.png">
+    </a>
+</h1>
+
+<img class="profile" src="../img/profile.png" style="width:200px; height: 200px;;">
+
+<div class="header">
+    <h2>
+        <!--(Insert get user name)SELECT --> (User) Information
+    </h2>
+</div>
+
+<p>Here you can edit your account information.</p>
+
+<form action="/profile.php" method="post">
+    <div id="flex">
+    <div class="inputContainer">
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="fname" value="Temp"><br>
+    </div>
+
+    <div class="inputContainer">
+        <label for="lname">Last name:</label><br>
+        <input type="text" id="lname" name="lname" value="Temp"><br>
+    </div>
+
+    <div class="inputContainer">
+        <label for="email">E-mail:</label><br>
+        <input type="text" id="email" name="email" value="Temp"><br>
+    </div>
+
+    <div class="inputContainer">
+        <label for="passw">Password:</label><br>
+        <input type="text" id="passw" name="passw" value="Temp"><br>
+    </div>
+
+    <div class="inputContainer">
+        <label for="address">address:</label><br>
+        <input type="text" id="address" name="address" value="Temp"><br>
+    </div>
+
+    <div class="inputContainer">
+        <label for="city">City:</label><br>
+        <input type="text" id="city" name="city" value="Temp"><br>
+    </div>
+
+    <div class="inputContainer">
+        <label for="zipc">Zip code:</label><br>
+        <input type="text" id="zipc" name="zipc" value="Temp"><br>
+    </div>
+
+    
+    <div class="inputContainer">
+        <label for="mphone">Mobilephone number:</label><br>
+        <input type="text" id="mphone" name="mphone" value="Temp"><br>
+    </div>
+</div>
+
+    <div class="submitButton">
+        <input type="submit" value="Save">
+    </div>
+    
+</form>
+
+
+</body>
+</html>

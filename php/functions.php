@@ -1,16 +1,15 @@
 <?php
-
-function check_login($con){
+include("indecBackend.php");
+function check_login($conn){
 
     if(isset($_SESSION['UID'])){
-        $id = $_SESSION['UID'];
-        $query = "select * from Users where UID = '$id' limit 1";
+        echo"Welcome $username";
 
-        $result = mysqli_query($conn,$query);
 
-        if($result && mysqli_num_rows($result) > 0){
-            $user_data = mysqli_fetch_assoc($result);
-            return $user_data;
+
+
+        }else{
+            echo"no suer";
         }
     }
-}   
+   

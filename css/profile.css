@@ -1,0 +1,74 @@
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.smallProfile {
+    float: right;
+    width: 3%;
+    padding-right: 10px;
+}
+
+.profile {
+    position: relative;
+    transform: translate(-50%);
+    left: 50%;
+    top: 20%;
+}
+
+.header {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    font-size: large;
+    margin-bottom: 50px;
+}
+
+.submitButton [type="submit"]{
+    top: 50%;
+    left: 50%;
+    position: relative;
+    width: 190px;
+    height: 40px;
+    background-color: black;
+    color: white;
+    border: 0px;
+    transform: translate(-50%);
+    font-size: large;
+    margin-top: 10px;
+}
+
+input[type=submit]:hover{
+    background-color: gray;
+}
+
+#flex {
+    display: flex;
+    flex-flow: row wrap;
+    width: 600px;
+    left: 50%;
+    position: relative;
+    transform: translate(-50%);
+}
+
+.inputContainer {
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-right: 50px;
+    width: 200px;
+}
+
+.inputContainer [type="text"]{
+    width: 250px;           /*Width of the box*/
+    height: 20px;           /*Height of the box*/
+}
+
+.inputContainer [type="password"]{
+    width: 250px;           /*Width of the box*/
+    height: 20px;           /*Height of the box*/
+}
+
+.inputContainer :focus {
+    border: 1px solid rgb(0, 0, 0);         /*When in focus marks it*/
+}

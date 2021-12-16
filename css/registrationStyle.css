@@ -32,7 +32,7 @@ body {
     background-color: rgb(255, 255, 255);
 }
 
-.registration-form button{
+.registration-form .button {
     font-size: 18px;
     font-weight: bold;
     margin: 20px 0;
@@ -45,7 +45,6 @@ body {
     cursor:pointer;
 }
 
-.registration-form button:hover{
-    background-color: white;
-    color: black;
+.registration-form .button:hover {
+    opacity: 0.7;
 }
