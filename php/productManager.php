@@ -3,7 +3,7 @@
 <head>
     <link rel='stylesheet' type='text/css' href='../css/admin.css'>
 
-    <title>Admin Management</title>
+    <title>Product Management</title>
 
 </head>
 <body>
@@ -13,7 +13,7 @@ include_once("navBar.php");
 include("indexBackend.php");
 session_start();
 if(isset($_SESSION['UID'])) {
-    if($_SESSION['Role']!=3){
+    if($_SESSION['Role']!=2){
         header("Location: http://130.240.200.34");
     }
 }else {
@@ -23,7 +23,7 @@ if(isset($_SESSION['UID'])) {
 
 <div class="header">
     <h2>
-        Admin Management
+        Product Management
     </h2>
 </div>
 
@@ -33,65 +33,67 @@ if(isset($_SESSION['UID'])) {
     </div>
     <div id="banner-attributes">
         <div class="smallbl">
-            <p> UID & Username</p>
+            <p>PID</p>
         </div>
         <div class="smallb">
-            <p>Full Name</p>
+            <p>Product Name</p>
         </div>
         <div class="smallb">
-            <p>E-mail</p>
+            <p>Price</p>
         </div>
         <div class="smallbr">
-            <p>Permission Level</p>
+            <p>In Stock</p>
         </div>
     </div>
     <div class="user-list">
         <?php
 
         if(isset($_POST['submit-deletion'])){
-            $uid = $_POST['uid'];
-            if(!empty($uid)){
+            $pid = $_POST['pid'];
+            if(!empty($pid)){
                 //Update the database
-                $sql = "DELETE FROM Carts WHERE UID=?";
+                $sql = "DELETE FROM Product WHERE PID=?";
                 $stmt = mysqli_prepare($conn, $sql); 
-                mysqli_stmt_bind_param($stmt, "s", $uid);
-                mysqli_stmt_execute($stmt);
-
-                $sql = "DELETE FROM Users WHERE UID=?";
-                $stmt = mysqli_prepare($conn, $sql); 
-                mysqli_stmt_bind_param($stmt, "s", $uid);
+                mysqli_stmt_bind_param($stmt, "i", $pid);
                 mysqli_stmt_execute($stmt);
             }
         }
         if(isset($_POST['submit-save'])){
-            $role = $_POST['role'];
-            $uid = $_POST['uid'];
-            if(!empty($role)&&!empty($uid)){
-                //Update the database
-                $sql = "UPDATE Users SET Role=? WHERE UID=$uid";
-                $stmt = mysqli_prepare($conn, $sql); 
-                mysqli_stmt_bind_param($stmt, "s", $role);
+            $amount = $_POST['amount'];
+            $pid = $_POST['pid'];
+            if(!empty($amount)&&!empty($pid)){
+
+                $sql =$conn->prepare("SELECT Amount FROM Product WHERE PID = ?");
+                $sql->bind_param("s",$pid);
+                $sql->execute();
+                $sql->bind_result($currAmount);
+                $sql->fetch();
+                $sql->close();
+                $newAmount = $currAmount + $amount;
+                
+                $sql_amount = "UPDATE Product SET Amount=? WHERE PID=$pid";
+                $stmt = mysqli_prepare($conn, $sql_amount); 
+                mysqli_stmt_bind_param($stmt, "i", $newAmount);
                 mysqli_stmt_execute($stmt);
             }
         }
 
-        $sql = "SELECT FName, Lastname, Email, Role, Password_1, username, UID FROM Users";
+        $sql = "SELECT Name, PID, Amount, Price FROM Product";
         $result = $conn->query($sql);
         if($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                $role = $row["Role"];
                 echo '<div class="bblock">
                         <div class="lsmallbl">
-                            <p>'. $row["UID"] . " - " . $row["username"] .'</p>
+                            <p>'. $row["PID"] . '</p>
                         </div>
                         <div class="lsmallb">
-                            <p>'. $row["FName"] . " " . $row["Lastname"] .'</p>
+                            <p>'. $row["Name"] . '</p>
                         </div>
                         <div class="lsmallb">
-                            <p>'. $row["Email"] .'</p>
+                            <p>'. "$" . $row["Price"] .'</p>
                         </div>
                         <div class="lsmallbr">
-                            <p>'. $row["Role"] .'</p>
+                            <p>'. $row["Amount"] .'</p>
                         </div>
                         
                     </div>';
@@ -103,22 +105,22 @@ if(isset($_SESSION['UID'])) {
     </div>
     <div class="deleteCustomer">
         <div id="bannerDeleteCustomer">
-            <a>Change Permission</a>
+            <a>Change Stock</a>
         </div>
-        <form action="admin.php" method="post">
+        <form action="productManager.php" method="post">
             <div class="dcform">
                 <div class="sUidBanner">
-                    <p>UID:</p>
+                    <p>PID:</p>
                 </div>
                 <div class="permInput">
-                    <input type="text" id="uid" name="uid"><br>
+                    <input type="text" id="uid" name="pid"><br>
                 </div>
 
                 <div class="permBanner">
-                    <p>Permisson:</p>
+                    <p>Amount:</p>
                 </div>
                 <div class="permInput">
-                    <input type="text" id="role" name="role"><br>
+                    <input type="text" id="role" name="amount"><br>
                 </div>
 
                 <div class="sbutton">
@@ -130,15 +132,15 @@ if(isset($_SESSION['UID'])) {
 
     <div class="deleteCustomer">
         <div id="bannerDeleteCustomer">
-            <a>Delete Customer</a>
+            <a>Delete Product</a>
         </div>
-        <form action="admin.php" method="post">
+        <form action="productManager.php" method="post">
             <div class="dcform">
                 <div class="uidBanner">
-                    <p>UID:</p>
+                    <p>PID:</p>
                 </div>
                 <div class="uidInput">
-                    <input type="text" id="uid" name="uid"><br>
+                    <input type="text" id="uid" name="pid"><br>
                 </div>
                 <div class="dbutton">
                     <input type="submit" name="submit-deletion" value="Delete">
@@ -147,8 +149,8 @@ if(isset($_SESSION['UID'])) {
         </form>
     </div>
     
-    <a id="oButton" href="orders.php">
-        <button> Orders </button>
+    <a id="oButton" href="../html/productUpload.php">
+        <button> Upload Product </button>
     </a>
 
 </div>

@@ -9,10 +9,16 @@
 <body>
 
 <?php
-session_start();
+include_once("navBar.php");
 include("indexBackend.php");
-include("functions.php");
 
+session_start();
+
+if(!isset($_SESSION['UID'])) {
+    header("Location: http://130.240.200.34");
+}
+
+$user = $_SESSION["UID"];
 if(isset($_POST['submit'])){
     
     $fname = $_POST['fname'];
@@ -28,14 +34,14 @@ if(isset($_POST['submit'])){
     if(!empty($fname) && !empty($lname) && !empty($email)  && !empty($passw)){
         //Update the database
         //$id------Hård kodad BOB ID----------------------------------
-        $sql = "UPDATE Users SET FName=?, Lastname=?, Email=?, Adress=?, City=?, Phonenumber=?, Password_1=?, Zipcode=? WHERE UID=5";
+        $sql = "UPDATE Users SET FName=?, Lastname=?, Email=?, Adress=?, City=?, Phonenumber=?, Password_1=?, Zipcode=? WHERE UID=$user";
         $stmt = mysqli_prepare($conn, $sql); 
         mysqli_stmt_bind_param($stmt, "ssssssss", $fname, $lname, $email, $address, $city, $mphone, $passw, $zipc);
         mysqli_stmt_execute($stmt);
     }
 }
 
-$sql = "SELECT FName, Lastname, Email, Adress, City, Phonenumber, Password_1, Zipcode, username FROM Users WHERE UID='5'"; //$id ------------------------------
+$sql = "SELECT FName, Lastname, Email, Adress, City, Phonenumber, Password_1, Zipcode, username FROM Users WHERE UID=$user"; //$id ------------------------------
 $result = $conn->query($sql);
 if($result->num_rows > 0){
     $data = mysqli_fetch_array($result);
@@ -55,19 +61,6 @@ if($result->num_rows > 0){
 $conn->close();
 ?>
 
-<h1>
-    <a href="../php/profile.php">
-        <img class="smallProfile" src="../img/profile.png" style="width: 2.5%;">
-    </a>
-
-    <a href="..">
-        <img class="smallProfile" src="../img/home.png" style="width: 2.75%;">
-    </a>
-
-    <a href="../php/checkout.php">
-        <img class="smallProfile" src="../img/cart.png">
-    </a>
-</h1>
 
 <img class="profile" src="../img/profile.png" style="width:200px; height: 200px;;">
 

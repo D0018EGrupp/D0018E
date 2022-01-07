@@ -1,4 +1,5 @@
 <?php
+include_once('../php/navBar.php');
 $alreadyUploaded = 0;
 $target_dir = "../productImg/";
 if($alreadyUploaded == 0){
@@ -79,6 +80,8 @@ if ($uploadOk == 0) {
                 </textarea>
             <p>Price:</p>
                 <input type="text" name="price" placeholder="Price" required>
+            <p>Amount:</p>
+              <input type="text" name="amount" placeholder="amount" required>
             <p>Category:</p>
                 <input type="text" name="category" placeholder="Category" required>
         <div class="upload">
@@ -92,55 +95,70 @@ if ($uploadOk == 0) {
                 }
                 $target_file = $_POST['imageName'];
                 echo $_POST['imageName'];
-                $imageLocation = "../img/".$_FILES["fileToUpload"]["name"];
+                $imageLocation = "../productImg/".$_FILES["fileToUpload"]["name"];
                 $productName = $_POST['productName'];
                 $description = $_POST['description'];
-                $price = (int) $_POST['price'];
+                $price = $_POST['price'];
                 $category = $_POST['category'];
-                $sql = $sql = "INSERT INTO `Product` (`Name`, `PID`, `Amount`, `ImgSrc`, `Price`, `Description`, `Rating`, `AmountBought`, `Category`)
-                VALUES ('$productName', NULL, NULL, '$target_file', $price, '$description', NULL, NULL, '$category')";
-                if ($conn->query($sql) === TRUE) {
-                    echo "New record created successfully";
-                } else {
-                    echo "Error: " . $sql . "<br>" . $conn->error;
+                $amount = $_POST['amount'];
+                if($_POST['price']<0 || !preg_match('/^[0-9 +-]*$/', $price ) || preg_match("/[\[^\'£$%^&*()}{@:\'#~?><>,;@\|\\\-=\-_+\-¬\`\]]/",$price)){
+                  echo  "<br><br><h> PLEASE ENTER VALID INPUT, You need to enter the name of the file including the extention again in the above text field. </h>";
+                  $backUp = $target_file;
                 }
-                $File = $productName.".php"; 
-                $myfile = fopen("Temp", "w") or die("Unable to open file!");
-                $txt = "
-                <link rel='stylesheet' href='../css/productPage.css'>
-                    <main class='container'>
-                    
-                        <!-- Left Column / Headphones Image -->
-                        <div class='left-column'>
-                        <img data-image='Product' src='../img/placeholder.png' style='float: left;' alt=''>
-                        </div>
-                    
-                    
-                        <!-- Right Column -->
-                        <div class='right-column'>
-                    
-                        <!-- Product Description -->
-                        <div class='product-description'>
-                            <h1>".$productName."</h1>
-                            <p>".$description."</p>
-                        </div>
-                    
-                        <!-- Product Configuration -->
-                        <div class='product-configuration'>
-                    
-                        <!-- Product Pricing -->
-                        <div class='product-price'>
-                            <span>".$price."</span>
-                            <a href='#' class='cart-btn'>Add to cart</a>
-                        </div>
-                        </div>
-                    </main>
-                ";
-                fwrite($myfile, $txt);
-                fclose($myfile);
-                rename("Temp", "../productPages/".$File);
-                #echo '<meta http-equiv="refresh" content="0">';
-                $conn->close();
+                else{
+                  echo "BACKUP IS".$backUP,$target_file;
+                  echo "VALUES ".$imageLocation." ".$productName." ".$description." ".$price." ".$category;
+                  $sql = $sql = "INSERT INTO `Product` (`Name`, `PID`, `Amount`, `ImgSrc`, `Price`, `Description`, `Rating`, `AmountRated`, `Category`)
+                  VALUES ('$productName', NULL, '$amount', '$target_file', $price, '$description', NULL, NULL, '$category')";
+                  if ($conn->query($sql) === TRUE) {
+                      echo "New record created successfully";
+                  } else {
+                      echo "Error: " . $sql . "<br>" . $conn->error;
+                  }
+                  $File = $productName.".php"; 
+                  $myfile = fopen("Temp", "w") or die("Unable to open file!");
+                  $txt = "
+                  
+                  <link rel='stylesheet' href='../css/productPage.css'>
+                      <main class='container'>
+                      
+                          <!-- Left Column / Headphones Image -->
+                          <div class='left-column'>
+                          <img data-image='Product' src='".$_POST['imageName']."' style='float: left;' alt=''>
+                          </div>
+                      
+                      
+                          <!-- Right Column -->
+                          <div class='right-column'>
+                      
+                          <!-- Product Description -->
+                          <div class='product-description'>
+                              <h1>".$productName."</h1>
+                              <p>".$description."</p>
+                          </div>
+                      
+                          <!-- Product Configuration -->
+                          <div class='product-configuration'>
+                      
+                          <!-- Product Pricing -->
+                          <div class='product-price'>
+                              <span>".$price."</span>
+                              <form method = 'POST' action='$productName.php'>
+                              <input class='cart-btn' name='cart-btn' id='cart-btn' type='submit' value='Add to cart'>
+                              </form>
+                          </div>
+                          </div>
+                      </main><?php include('../php/comment.php'); include('../php/cartfunction.php'); include('../php/rating.php'); include('../php/loginCheck.php'); ?>"
+                      
+                  ;
+                  fwrite($myfile, $txt);
+                  fclose($myfile);
+                  rename("Temp", "../productPages/".$File);
+                  //echo '<meta http-equiv="refresh" content="0">';
+                  $conn->close();
+
+                }
+               
             }                
             ?>
         </div>

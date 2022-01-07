@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php include_once('../php/navBar.php'); ?>
 
 <html>
 

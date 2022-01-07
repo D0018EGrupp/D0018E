@@ -19,6 +19,33 @@ html, body {
     width: 65%;
     float:left;
 }
+
+textarea {
+    resize: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.left-column {
+    width: 700px;
+    height: 700px;
+    height: auto;
+    float: left;
+    margin: 3px;
+    padding: 3px;
+}
+
+.comments{
+    border: 1px outset rgb(0, 0, 0);
+    text-align: center;
+    width: 150px;
+    margin-top: 1%;
+    
+}
+
   
   
 .right-column {

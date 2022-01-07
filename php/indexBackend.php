@@ -6,6 +6,4 @@ $dbName = "Website";
 
 $conn = new mysqli($servername, $username, $password, $dbName);
 
-
-
 ?>

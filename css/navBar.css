@@ -1,0 +1,73 @@
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.navBar {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 4px 0 black;
+    
+}
+
+.loggedin a{
+    
+    position: absolute;
+    margin-top: 25px;
+    left: 90%;
+    top: 0%;   
+    text-align: center;   
+    transform: translate(-100%, -50%);
+}
+
+#shopBanner {
+    display: block;
+    width: 150px;
+    height: 50px;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+
+.smallProfile {
+    float: right;
+    width: 3%;
+    padding-right: 10px;
+    margin-top: 5px;
+}
+
+.dropDownMenu:hover .dropdownContent {
+    display: block;
+}
+
+.dropdownContent {
+display: none;
+position: absolute;
+margin-top: 45px;
+width: 70px;
+right: 0%;
+padding: 12px 16px;
+text-align: center;
+}
+
+.dropdownContent button, .button{
+    width: 80px;
+    height: 25px;
+    background-color: black;
+    color: white;
+    border: 0px;
+    font-size: large;
+}
+
+.dropdownContent button:hover{
+    opacity: 0.7;
+}
+
+.dropdownContent [type="submit"]:hover{
+    opacity: 0.7;
+}

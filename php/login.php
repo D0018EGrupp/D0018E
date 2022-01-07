@@ -1,7 +1,7 @@
 <?php
 session_start();
+include_once('navBar.php');
 require("indexBackend.php");
-include("functions.php");
     //some thing was posted
     if (isset($_POST['submit'])){
     $username = $_POST['username'];
@@ -10,16 +10,17 @@ include("functions.php");
     
         if(!empty($username) && !empty($password)){
             //read from database
-            $query =$conn->prepare("SELECT UID FROM Users WHERE username = ? AND Password_1 = ?");
+            $query =$conn->prepare("SELECT UID, Role FROM Users WHERE username = ? AND Password_1 = ?");
             $query->bind_param("ss",$username, $password);
             $query->execute();
-            $query->bind_result($UID);
+            $query->bind_result($UID, $Role);
             $query->fetch();
             $query->close();
            
             if(isset($UID)){
                 $_SESSION["username"]= $username;
                 $_SESSION["UID"] = $UID;
+                $_SESSION["Role"] = $Role;
     
 
                 header("Location: http://130.240.200.34/");

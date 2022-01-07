@@ -10,18 +10,33 @@ body {
 
 .header {
     position: absolute;
-   top: 10%;
+    top: 10%;
     left: 50%;
     transform: translate(-50%);
 }
 
-#flex-2 {
+#mainBlock {
     display: block;
     position: absolute;
     left: 50%;
     top: 20%;
     transform: translate(-50%);
-    height: 800px;
+    height: 600px;
+    width: 1500px;
+}
+
+.orderAndShipping {
+    display: inline-flex;
+    position: relative;
+    width: 1500px;
+}
+
+#shipping {
+    margin-left: 37px;
+}
+
+#orders {
+    margin-right: 37px;
 }
 
 #banner-customers a {
@@ -30,20 +45,22 @@ body {
     background-color: rgb(0, 0, 0);
     color: rgb(255, 255, 255);
     display: block;
-    padding: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     border: 1px solid #000000;
+    width: 711px;
 }
 
 #banner-attributes {
     color: rgb(255, 255, 255);
     display: inline-flex;
-    width: 1000px;
+    width: 711px;
     height: 50px;
     border: 1px solid #000000;
 }
 
-.smallb {
-    width: 250px;
+.secToSixAttr {
+    width: 100px;
     height: 50px;
     background-color: #000000;
     text-align: center;
@@ -51,16 +68,16 @@ body {
     border-left: 1px solid #ffffff;
 }
 
-.smallbl {
-    width: 250px;
+.firstAttr {
+    width: 100px;
     height: 50px;
     background-color: #000000;
     text-align: center;
     border-right: 1px solid #ffffff;
 }
 
-.smallbr {
-    width: 250px;
+.seventhAttr {
+    width: 100px;
     height: 50px;
     background-color: #000000;
     text-align: center;
@@ -70,21 +87,21 @@ body {
 .bblock {
     color: rgb(0, 0, 0);
     display: inline-flex;
-    width: 1000px;
+    width: 711px;
     height: 50px;
     border-bottom: 1px solid #000000;
 }
 
-.lsmallbr {
-    width: 250px;
+.lseventhAttr {
+    width: 100px;
     height: 50px;
     background-color: #ffffff;
     border-left: 1px solid #0000007c;
     text-align: center;
 }
 
-.lsmallb {
-    width: 250px;
+.lsecToSixAttr {
+    width: 100px;
     height: 50px;
     background-color: #ffffff;
     text-align: center;
@@ -92,8 +109,8 @@ body {
     border-left: 1px solid #0000007c;
 }
 
-.lsmallbl {
-    width: 250px;
+.lfirstAttr {
+    width: 100px;
     height: 50px;
     background-color: #ffffff;
     text-align: center;
@@ -101,25 +118,25 @@ body {
 }
 
 .user-list {
-    width: 1000px;
+    width: 711px;
     height: 300px;
     overflow-y: auto;
     border: 1px solid #000000;
 }
 
-.bblock:hover .lsmallb{
+.bblock:hover .lsecToSixAttr{
     background-color: #ccc;
 }
 
-.bblock:hover .lsmallbl{
+.bblock:hover .lfirstAttr{
     background-color: #ccc;
 }
 
-.bblock:hover .lsmallbr{
+.bblock:hover .lseventhAttr{
     background-color: #ccc;
 }
 
-.bblock:hover .lsmallbr [type=text]{
+.bblock:hover .lseventhAttr [type=text]{
     background-color: #ccc;
 }
 
@@ -196,6 +213,7 @@ body {
     font-size: larger;
     border-right: 1px solid black;
 }
+
 .permBanner {
     text-align: center;
     display: block;
